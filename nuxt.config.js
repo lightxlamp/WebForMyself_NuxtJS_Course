@@ -1,9 +1,7 @@
 
 module.exports = {
   mode: 'universal',
-  /*
-  ** Headers of the page
-  */
+
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -29,7 +27,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/globals'
   ],
   /*
   ** Nuxt.js dev-modules
