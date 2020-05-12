@@ -1,60 +1,70 @@
 <template>
     <article class="post">
-         <header class="post__header">
-             <div class="post__title">
-                <h1>Post Title</h1>
-                <nuxt-link to="/">
-                    <i class="el-icon-back"></i> 
-                </nuxt-link>
-             </div>
+        <header class="post__header">
+            <div class="post__title">
+            <h1>Post Title</h1>
+            <nuxt-link to="/">
+                <i class="el-icon-back"></i> 
+            </nuxt-link>
+            </div>
 
-             <div class="post__info">
-                <small>
-                    <i class="el-icon-time"></i>
-                    {{ new Date().toLocaleString() }}
+            <div class="post__info">
+            <small>
+                <i class="el-icon-time"></i>
+                {{ new Date().toLocaleString() }}
+            </small>
+
+            <small>
+                <i class="el-icon-view"></i>
+                42 
                 </small>
+            </div>
 
-                <small>
-                    <i class="el-icon-view"></i>
-                    42 
-                 </small>
-             </div>
+            <div class="post__image">
+            <img 
+                src="https://netmaddy.com/wp-content/uploads/2017/02/qbeats-blog-post-how-does-qbeats-integrate-with-wordpress-5.jpg"
+                alt="Notebook image"
+                class="post__image" 
+            /> 
+            </div>
+        </header>
+        <main class="post__content ">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
+            </p>    
+            
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
+            </p>    
+            
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
+            </p>
+        </main> 
 
-             <div class="post__image">
-                <img 
-                    src="https://netmaddy.com/wp-content/uploads/2017/02/qbeats-blog-post-how-does-qbeats-integrate-with-wordpress-5.jpg"
-                    alt="Notebook image"
-                    class="post__image" 
-                /> 
-             </div>
-         </header>
-         <main class="post__content ">
-             <p>
-                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
-                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
-                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
-             </p>    
+        <footer>
+            <div class="post__comments" v-if="true">
+                <app-comment
+                    v-for="comment in 4"
+                    :key="comment"
+                    :comment="comment"
+                />
+            </div>
              
-             <p>
-                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
-                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
-                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
-             </p>    
-             
-              <p>
-                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
-                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
-                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti tempore voluptas eius.
-             </p>
-         </main> 
-
-         <footer>
-              
-         </footer>
+            <div class="text-center" v-else>No comments </div>
+        </footer>
     </article>
 </template>
 
 <script>
+import AppComment from '@/components/main/Comment'
+
 export default {
     // Nuxt расширяет возможности VueJS и добавляет параметр validate 
     // Nuxt adds to VueJS parameters one more -  "validate"
@@ -62,9 +72,12 @@ export default {
     // Если в строке есть ID - показываем страницу, если нет - показываем 404
     validate ({params}) {
         return Boolean(params.id)   
+    },
+    components: {
+        AppComment
     }
 }
-</script>
+</script> 
 
 <style lang="scss" scoped>
     .post {
