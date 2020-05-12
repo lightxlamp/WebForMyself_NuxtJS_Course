@@ -49,7 +49,10 @@
         </main> 
 
         <footer>
-            <div class="post__comments" v-if="true">
+
+            <app-comment-form /> 
+
+            <div class="post__comments" v-if="false">
                 <app-comment
                     v-for="comment in 4"
                     :key="comment"
@@ -64,6 +67,7 @@
 
 <script>
 import AppComment from '@/components/main/Comment'
+import AppCommentForm from '@/components/main/CommentForm'
 
 export default {
     // Nuxt расширяет возможности VueJS и добавляет параметр validate 
@@ -74,7 +78,8 @@ export default {
         return Boolean(params.id)   
     },
     components: {
-        AppComment
+        AppComment, 
+        AppCommentForm 
     }
 }
 </script> 
