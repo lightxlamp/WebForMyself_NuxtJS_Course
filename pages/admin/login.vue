@@ -58,7 +58,30 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log('submit')
+        this.$refs.form.validate(async valid => {
+            if(valid) {
+                this.loading = true
+
+                    try {
+                    const formData = {
+                        login: this.controls.login,
+                        password: this.controls.password
+                    }
+                    // then we should dispatch this data
+                    // Название модуля / названия экшена
+                    // debugger 
+
+                    await this.$store.dispatch('auth/login', formData)
+                    // Чтобы писать await - функция должна быть асинхронной. - это понятно ) 
+                    // И дальше: "функция" начинается здесь "validate(valid => " логично) но если бы я сам делал..
+                    // старался бы до this.$refs этот async лепить... ) Такой вот учебный момент. Делюсь "недопониманием" пока своим 
+                    this.$router.push('/admin')
+                }
+                catch(e) {
+                    this.loading = false
+                }
+            }
+        })
     }
   }
 }
