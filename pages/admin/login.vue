@@ -64,8 +64,13 @@ export default {
     // выглядит как баг
     const {message} = this.$route.query
 
-    if(message === 'pleaseLogin') {
-      this.$message.info('Please login - to see other pages of admin')
+    switch(message) {
+      case 'pleaseLogin': 
+        this.$message.info('Please login - to see other pages of Admin')
+        break
+      case 'logout':
+        this.$message.success('You have been logged off successfully')
+        break
     }
   },
 
