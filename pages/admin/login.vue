@@ -56,6 +56,19 @@ export default {
       }
     }
   },
+
+  mounted() {
+    // Вызывается тогда, когда DOM дерево готово для работы
+    // Вызывается только на клиенте. А Created() вызывается и на сервере и на клиенте
+    // Если есть сообщение в Get параметре, то мы покажем его пользователю. А то типо простой Redirect без пояснений
+    // выглядит как баг
+    const {message} = this.$route.query
+
+    if(message === 'pleaseLogin') {
+      this.$message.info('Please login - to see other pages of admin')
+    }
+  },
+
   methods: {
     onSubmit() {
         this.$refs.form.validate(async valid => {
