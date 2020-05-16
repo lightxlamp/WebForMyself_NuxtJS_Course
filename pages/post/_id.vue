@@ -50,9 +50,12 @@
 
         <footer>
 
-            <app-comment-form /> 
+            <app-comment-form 
+                v-if="isCommentFormVisible"
+                @created="createCommentHandler"
+            /> 
 
-            <div class="post__comments" v-if="false">
+            <div class="post__comments" v-if="true">
                 <app-comment
                     v-for="comment in 4"
                     :key="comment"
@@ -80,6 +83,16 @@ export default {
     components: {
         AppComment, 
         AppCommentForm 
+    },
+    methods : {
+        createCommentHandler() {
+            this.isCommentFormVisible = false
+        }
+    },
+    data() {
+        return {
+            isCommentFormVisible: true // to let user add only 1 comment
+        }
     }
 }
 </script> 

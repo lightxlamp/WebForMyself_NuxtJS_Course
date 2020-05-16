@@ -27,6 +27,7 @@
                 type="primary" 
                 round
                 native-type="submit" 
+                :loading="loading"
             >
                 Leave a comment
             </el-button>
@@ -38,6 +39,8 @@
 export default {
     data () {
         return {
+            loading: false,
+             
             controls: {
                 name: '',
                 text: ''
@@ -57,8 +60,24 @@ export default {
     methods: {
         onSubmit() {
             this.$refs.commentForm.validate(valid => {
-                if (valid) {
-                    console.log('Form is valid');
+                if (valid) { 
+                    this.loading = true;
+                    const formData = {
+                        name: this.controls.name,
+                        text: this.controls.text,
+                        postId: '' // to which post we should add this comment
+                    }
+
+                    try {
+                        setTimeout(() => {
+                            this.$emit('created') // с помощью этого метода можем связывать родителя и дочерний компонент
+                            this.$message.success('Comment added') // $message provided by Elements UI and extended bu Vue
+                        }, 2000)
+                    }
+
+                    catch (e) {
+                        this.loading = false;
+                    }
                 }
             });
         }
