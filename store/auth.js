@@ -20,12 +20,18 @@ export const mutations = {
 export const actions = {
 
     async login({commit, dispatch}, formData) {
- 
-        const token = await new Promise(resolve => {
-            setTimeout(() => resolve('token from server'), 2000)
-        })
-        console.log(token);
-        dispatch('setToken', token)
+        try {
+            const token = await new Promise((resolve, reject) => {
+                setTimeout(() => reject('token from server'), 2000)
+            })
+            dispatch('setToken', token)
+            console.log(token);
+        } 
+        catch(e) {
+            console.log(e);
+            commit('setError', e, {root: true}); // Чтобы искал setError mutation не в текущем auth stor'е
+            throw e
+        }
     },
 
     setToken({commit}, token) {
