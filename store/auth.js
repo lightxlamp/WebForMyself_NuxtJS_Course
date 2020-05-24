@@ -4,7 +4,8 @@
 // Поле isAuthenticated будет являться стрелочной функцией, как это положенно у Getter'ов
 
 export const state = () => ({
-    token: null
+    // token: null
+    token: true
 })
   
 export const mutations = {
@@ -22,7 +23,7 @@ export const actions = {
     async login({commit, dispatch}, formData) {
         try {
             const token = await new Promise((resolve, reject) => {
-                setTimeout(() => reject('token from server'), 2000)
+                setTimeout(() => resolve('token from server'), 2000)
             })
             dispatch('setToken', token)
             console.log(token);
@@ -37,6 +38,15 @@ export const actions = {
     setToken({commit}, token) {
         // write cookie logic here
         commit('setToken', token)
+    },
+
+    async createUser({commit}, formData) {
+        try {
+            console.log('Create user', formData);
+        }
+        catch (e) {
+
+        }
     },
 
     logout({commit}) {
